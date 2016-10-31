@@ -25,12 +25,10 @@ s.source = { :git => "https://github.com/AlvaroOlave/MemoryTextField.git", :tag 
 
 
 # 7
-#s.framework = "UIKit"
+s.framework = "SystemConfiguration"
 
 
 # 8
-s.source_files = "AOMemoryTextField/**/*.{h,m}"
+s.source_files = "AOMemoryTextField.{h,m}"
 
-# 9
-#s.resources = "AOMemoryTextField/**/*.{png,jpeg,jpg,storyboard,xib}"
 end
