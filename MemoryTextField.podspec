@@ -29,6 +29,6 @@ s.framework = 'SystemConfiguration'
 
 
 # 8
-s.source_files = 'AOMemoryTextField.{h,m}'
+s.source_files = 'AOMemoryTextField/*.{h,m}'
 
 end

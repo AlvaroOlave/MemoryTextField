@@ -151,9 +151,6 @@
 
 - (NSRange)makeRageWithRange:(NSRange)range
 {
-    NSLog(@"%@",NSStringFromRange(range));
-    NSLog(@"%lu",self.text.length);
-
     if (range.location == 0 && range.length == self.text.length) {//Delete all
         return range;
     }
