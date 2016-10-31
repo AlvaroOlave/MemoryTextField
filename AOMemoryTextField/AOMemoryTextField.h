@@ -1,9 +1,9 @@
 //
-//  CMCMemoryTextField.h
+//  AOMemoryTextField.h
 //  VideoConference
 //
 //  Created by Alvaro on 25/10/16.
-//  Copyright © 2016 CMC. All rights reserved.
+//  Copyright © 2016 AO. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
