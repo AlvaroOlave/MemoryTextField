@@ -73,6 +73,11 @@
     }
 }
 
+- (void)clearMemory
+{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:[self getKey]];
+}
+
 - (void)filterPreviousOptionsWithTippedText:(NSString *)text
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF BEGINSWITH[c] %@",text];
