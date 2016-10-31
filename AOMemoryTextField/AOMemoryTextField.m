@@ -6,12 +6,12 @@
 //  Copyright © 2016 CMC. All rights reserved.
 //
 
-#import "CMCMemoryTextField.h"
+#import "AOMemoryTextField.h"
 
 #define AL_DEFAULT_TEXTFIELD_KEY @"AL_DEFAULT_TEXTFIELD_KEY"
 
 
-@interface CMCMemoryTextField ()
+@interface AOMemoryTextField ()
 
 @property (nonatomic, strong) NSString *textFieldKey;
 @property (nonatomic, strong) NSMutableArray *previousEntries;
@@ -21,7 +21,7 @@
 
 @end
 
-@implementation CMCMemoryTextField
+@implementation AOMemoryTextField
 
 - (void)awakeFromNib
 {

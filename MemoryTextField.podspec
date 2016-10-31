@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
 # 1
 s.platform = :ios
 s.ios.deployment_target = '8.0'
-s.name = "AOMemoryTextField"
+s.name = "MemoryTextField"
 s.summary = "AOMemoryTextField provide autocomplete to a UITextField."
 s.requires_arc = true
 

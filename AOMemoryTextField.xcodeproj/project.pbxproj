@@ -7,17 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		38378A551DC668AE00F7FD5D /* AOMemoryTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 38378A531DC668AE00F7FD5D /* AOMemoryTextField.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		38378A5D1DC795D100F7FD5D /* CMCMemoryTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 38378A5B1DC795D100F7FD5D /* CMCMemoryTextField.h */; };
-		38378A5E1DC795D100F7FD5D /* CMCMemoryTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 38378A5C1DC795D100F7FD5D /* CMCMemoryTextField.m */; };
+		38378A5D1DC795D100F7FD5D /* AOMemoryTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 38378A5B1DC795D100F7FD5D /* AOMemoryTextField.h */; };
+		38378A5E1DC795D100F7FD5D /* AOMemoryTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 38378A5C1DC795D100F7FD5D /* AOMemoryTextField.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		38378A501DC668AE00F7FD5D /* AOMemoryTextField.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AOMemoryTextField.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		38378A531DC668AE00F7FD5D /* AOMemoryTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AOMemoryTextField.h; sourceTree = "<group>"; };
 		38378A541DC668AE00F7FD5D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		38378A5B1DC795D100F7FD5D /* CMCMemoryTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMCMemoryTextField.h; sourceTree = "<group>"; };
-		38378A5C1DC795D100F7FD5D /* CMCMemoryTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMCMemoryTextField.m; sourceTree = "<group>"; };
+		38378A5B1DC795D100F7FD5D /* AOMemoryTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AOMemoryTextField.h; sourceTree = "<group>"; };
+		38378A5C1DC795D100F7FD5D /* AOMemoryTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AOMemoryTextField.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,9 +48,8 @@
 		38378A521DC668AE00F7FD5D /* AOMemoryTextField */ = {
 			isa = PBXGroup;
 			children = (
-				38378A5B1DC795D100F7FD5D /* CMCMemoryTextField.h */,
-				38378A5C1DC795D100F7FD5D /* CMCMemoryTextField.m */,
-				38378A531DC668AE00F7FD5D /* AOMemoryTextField.h */,
+				38378A5B1DC795D100F7FD5D /* AOMemoryTextField.h */,
+				38378A5C1DC795D100F7FD5D /* AOMemoryTextField.m */,
 				38378A541DC668AE00F7FD5D /* Info.plist */,
 			);
 			path = AOMemoryTextField;
@@ -65,8 +62,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38378A551DC668AE00F7FD5D /* AOMemoryTextField.h in Headers */,
-				38378A5D1DC795D100F7FD5D /* CMCMemoryTextField.h in Headers */,
+				38378A5D1DC795D100F7FD5D /* AOMemoryTextField.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,7 +134,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38378A5E1DC795D100F7FD5D /* CMCMemoryTextField.m in Sources */,
+				38378A5E1DC795D100F7FD5D /* AOMemoryTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

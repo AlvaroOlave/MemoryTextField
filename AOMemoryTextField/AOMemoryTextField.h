@@ -1,19 +1,22 @@
 //
-//  AOMemoryTextField.h
-//  AOMemoryTextField
+//  CMCMemoryTextField.h
+//  VideoConference
 //
-//  Created by Alvaro on 30/10/16.
-//  Copyright © 2016 Alvaro. All rights reserved.
+//  Created by Alvaro on 25/10/16.
+//  Copyright © 2016 CMC. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-//! Project version number for AOMemoryTextField.
 FOUNDATION_EXPORT double AOMemoryTextFieldVersionNumber;
 
-//! Project version string for AOMemoryTextField.
 FOUNDATION_EXPORT const unsigned char AOMemoryTextFieldVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <AOMemoryTextField/PublicHeader.h>
+@interface AOMemoryTextField : UITextField
 
+- (void)setNameKey:(NSString *)key;
+- (void)saveNewEntry;
+- (void)filterPreviousOptionsWithTippedText:(NSString *)text;
+- (BOOL)shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
 
+@end
