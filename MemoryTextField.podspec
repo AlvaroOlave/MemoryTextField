@@ -25,10 +25,10 @@ s.source = { :git => "https://github.com/AlvaroOlave/MemoryTextField.git", :tag 
 
 
 # 7
-s.framework = "SystemConfiguration"
+s.framework = 'SystemConfiguration'
 
 
 # 8
-s.source_files = "AOMemoryTextField.{h,m}"
+s.source_files = 'AOMemoryTextField.{h,m}'
 
 end
