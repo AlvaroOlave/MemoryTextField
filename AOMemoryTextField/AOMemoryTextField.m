@@ -16,7 +16,7 @@
 @property (nonatomic, strong) NSString *textFieldKey;
 @property (nonatomic, strong) NSMutableArray *previousEntries;
 
-@property (nonatomic) BOOL memoryIsActive;
+@property (nonatomic) BOOL isReminding;
 @property (nonatomic) BOOL memoryIsEnabled;
 
 @end
@@ -27,7 +27,7 @@
 {
     [super awakeFromNib];
     
-    self.memoryIsActive = YES;
+    self.isReminding = YES;
     self.memoryIsEnabled = YES;
     
     [self initializePreviousEntries];
@@ -87,17 +87,17 @@
     [filteredArray sortUsingDescriptors:@[sortDescriptor]];
     
     if (filteredArray.count > 0) {
-        self.memoryIsActive = YES;
+        self.isReminding = YES;
         [self selectText:filteredArray.firstObject];
     }else{
-        self.memoryIsActive = NO;
+        self.isReminding = NO;
     }
 }
 
 - (void)selectText:(NSString *)text
 {
     if (text.length == self.text.length) {
-        self.memoryIsActive = NO;
+        self.isReminding = NO;
     }
     
     NSString *newText = [self removeMathchingCharactersOfText:text];
@@ -132,9 +132,9 @@
     if ([string isEqualToString:@""] && self.text.length > 0) {//Deleting
         NSRange newRange = range;
         
-        if (self.memoryIsActive) {
+        if (self.isReminding) {
             
-            self.memoryIsActive =
+            self.isReminding =
             self.memoryIsEnabled = NO;
             
             newRange = NSMakeRange(range.location + 1, range.length -1);
@@ -160,7 +160,7 @@
         return range;
     }
     if (range.location == self.text.length - 1 && range.length == 1) {//Delete last char
-        if (self.memoryIsActive) {
+        if (self.isReminding) {
             return NSMakeRange(range.location - 1 , range.length + 1);
         }
         return NSMakeRange(range.location, range.length);
