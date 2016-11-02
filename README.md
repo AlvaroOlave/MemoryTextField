@@ -1,4 +1,4 @@
-# Project Name
+# MemoryTextField
 
 MemoryTextField adds autocomplete functionality to your UITextFields in the simplest form. 
 
