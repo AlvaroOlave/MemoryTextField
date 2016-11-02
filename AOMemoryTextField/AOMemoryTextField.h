@@ -17,7 +17,6 @@ FOUNDATION_EXPORT const unsigned char AOMemoryTextFieldVersionString[];
 - (void)setNameKey:(NSString *)key;
 - (void)clearMemory;
 - (void)saveNewEntry;
-- (void)filterPreviousOptionsWithTippedText:(NSString *)text;
 - (BOOL)shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
 
 @end
