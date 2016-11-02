@@ -8,13 +8,15 @@
 
 #import "AOMemoryTextField.h"
 
-#define AL_DEFAULT_TEXTFIELD_KEY @"AL_DEFAULT_TEXTFIELD_KEY"
-
+#define AL_DEFAULT_TEXTFIELD_KEY        @"AL_DEFAULT_TEXTFIELD_KEY"
+#define AL_DEFAULT_MEMORY_CAPACITY      10
 
 @interface AOMemoryTextField ()
 
 @property (nonatomic, strong) NSString *textFieldKey;
 @property (nonatomic, strong) NSMutableArray *previousEntries;
+
+@property (nonatomic) NSUInteger capacity;
 
 @property (nonatomic) BOOL isReminding;
 @property (nonatomic) BOOL memoryIsEnabled;
@@ -23,12 +25,16 @@
 
 @implementation AOMemoryTextField
 
+@synthesize dataManagerDelegate = _dataManagerDelegate;
+
+
 - (void)awakeFromNib
 {
     [super awakeFromNib];
     
     self.isReminding = YES;
     self.memoryIsEnabled = YES;
+    self.capacity = AL_DEFAULT_MEMORY_CAPACITY;
     
     [self initializePreviousEntries];
 }
@@ -45,9 +51,22 @@
     [self initializePreviousEntries];
 }
 
+- (void)setMemoryCapacity:(NSUInteger)capacity
+{
+    self.capacity = capacity;
+}
+
 - (void)initializePreviousEntries
 {
-    self.previousEntries = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:[self getKey]]];
+    if (self.dataManagerDelegate) {
+        [self.dataManagerDelegate getMemorizedWordsWithKey:[self getKey] withCompletion:^(NSArray<NSString *> *entries) {
+            self.previousEntries = [NSMutableArray arrayWithArray:entries];
+        }];
+    }else{
+        
+        self.previousEntries = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:[self getKey]]];
+        
+    }
     
     if (!self.previousEntries) {
         self.previousEntries = [NSMutableArray array];
@@ -56,20 +75,24 @@
 
 - (void)saveNewEntry
 {
-    __block bool exist = NO;
-    [self.previousEntries enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj isEqualToString:self.text]) {
-            exist = YES;
-            *stop = true;
+    if (self.dataManagerDelegate) {
+        [self.dataManagerDelegate saveNewWord:self.text];
+    }else{
+        __block bool exist = NO;
+        [self.previousEntries enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([obj isEqualToString:self.text]) {
+                exist = YES;
+                *stop = true;
+            }
+        }];
+        
+        if (!exist) {
+            if (self.previousEntries.count > self.capacity) {
+                [self.previousEntries removeObjectAtIndex:0];
+            }
+            [self.previousEntries addObject:self.text];
+            [[NSUserDefaults standardUserDefaults] setObject:self.previousEntries forKey:[self getKey]];
         }
-    }];
-    
-    if (!exist) {
-        if (self.previousEntries.count > 10) {
-            [self.previousEntries removeObjectAtIndex:0];
-        }
-        [self.previousEntries addObject:self.text];
-        [[NSUserDefaults standardUserDefaults] setObject:self.previousEntries forKey:[self getKey]];
     }
 }
 
