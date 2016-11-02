@@ -4,7 +4,9 @@ MemoryTextField adds autocomplete functionality to your UITextFields in the simp
 
 ## Installation
 
-TODO: Describe the installation process
+In your Podfile:
+
+pod 'MemoryTextField', '~> 0.1.2'
 
 ## Usage
 
