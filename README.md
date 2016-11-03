@@ -33,7 +33,8 @@ In your textField´s delegate, implement
 ```objective-c
         - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
 ```
-    and return the result of invoke this MemoryTextField method. 
+    
+and return the result of invoke this MemoryTextField method. 
 
 
 Added support for your own persistence, in case that don´t want to use the NSUserDefaults.
