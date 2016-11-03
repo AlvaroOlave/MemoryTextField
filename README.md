@@ -2,11 +2,13 @@
 
 MemoryTextField adds autocomplete functionality to your UITextFields in the simplest form. 
 
+![readmeImg](https://raw.githubusercontent.com/AlvaroOlave/MTFPodSpecs/master/readmeImg.png)
+
 ## Installation
 
 In your Podfile:
 
-pod 'MemoryTextField', '~> 0.1.2'
+pod 'MemoryTextField', '~> 0.1'
 
 ## Usage
 
@@ -21,6 +23,8 @@ Just make your UITextField inherit from MemoryTextField and invoke the next meth
     
     and return the result of invoke this MemoryTextField method. 
 
+
+Added support for your own persistence, in case that don´t want to use the NSUserDefaults.
 
 ## License
 
