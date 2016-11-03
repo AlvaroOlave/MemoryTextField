@@ -21,6 +21,10 @@
 @property (nonatomic) BOOL isReminding;
 @property (nonatomic) BOOL memoryIsEnabled;
 
+@property (nonatomic) kAOFilterResults resultPolicy;
+
+@property (nonatomic, strong) NSPredicate *evalPredicate;
+
 @end
 
 @implementation AOMemoryTextField
@@ -32,8 +36,10 @@
 {
     [super awakeFromNib];
     
-    self.isReminding = YES;
+    self.isReminding =
     self.memoryIsEnabled = YES;
+    self.resultPolicy = kAOFilterResultsNoPolicySelected;
+    
     self.capacity = AL_DEFAULT_MEMORY_CAPACITY;
     
     [self initializePreviousEntries];
@@ -51,9 +57,19 @@
     [self initializePreviousEntries];
 }
 
+- (void)setFilterResultsPolicy:(kAOFilterResults)resultsPolicy
+{
+    self.resultPolicy = resultsPolicy;
+}
+
+- (void)setEvaluationPredicate:(NSPredicate *)predicate
+{
+    self.evalPredicate = predicate;
+}
+
 - (void)setMemoryCapacity:(NSUInteger)capacity
 {
-    self.capacity = capacity;
+    self.capacity = MAX(capacity, 1);
 }
 
 - (void)initializePreviousEntries
@@ -75,25 +91,32 @@
 
 - (void)saveNewEntry
 {
-    if (self.dataManagerDelegate) {
-        [self.dataManagerDelegate saveNewWord:self.text];
-    }else{
-        __block bool exist = NO;
-        [self.previousEntries enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if ([obj isEqualToString:self.text]) {
-                exist = YES;
-                *stop = true;
+    if ([self evaluateString]) {
+        if (self.dataManagerDelegate) {
+            [self.dataManagerDelegate saveNewWord:self.text];
+        }else{
+            __block bool exist = NO;
+            [self.previousEntries enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([obj isEqualToString:self.text]) {
+                    exist = YES;
+                    *stop = true;
+                }
+            }];
+            
+            if (!exist) {
+                if (self.previousEntries.count > self.capacity) {
+                    [self.previousEntries removeObjectAtIndex:0];
+                }
+                [self.previousEntries addObject:self.text];
+                [[NSUserDefaults standardUserDefaults] setObject:self.previousEntries forKey:[self getKey]];
             }
-        }];
-        
-        if (!exist) {
-            if (self.previousEntries.count > self.capacity) {
-                [self.previousEntries removeObjectAtIndex:0];
-            }
-            [self.previousEntries addObject:self.text];
-            [[NSUserDefaults standardUserDefaults] setObject:self.previousEntries forKey:[self getKey]];
         }
     }
+}
+
+- (BOOL)evaluateString
+{
+    return (self.evalPredicate) ? [self.evalPredicate evaluateWithObject:self.text] : YES;
 }
 
 - (void)clearMemory
@@ -106,7 +129,8 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF BEGINSWITH[c] %@",text];
     NSMutableArray *filteredArray = [self.previousEntries filteredArrayUsingPredicate:predicate].mutableCopy;
     
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"length" ascending:YES];
+    NSSortDescriptor *sortDescriptor = [self shortDescriptor];
+    
     [filteredArray sortUsingDescriptors:@[sortDescriptor]];
     
     if (filteredArray.count > 0) {
@@ -175,6 +199,20 @@
     }
 
     return NO;
+}
+
+- (NSSortDescriptor *)shortDescriptor
+{
+    return (self.resultPolicy == kAOFilterResultsLastInFirstOut) ?
+        [NSSortDescriptor sortDescriptorWithKey: @"self" ascending: NO] :
+    (self.resultPolicy == kAOFilterResultsFirstInFirstOut) ?
+        [NSSortDescriptor sortDescriptorWithKey: @"self" ascending: YES] :
+        [[NSSortDescriptor alloc] initWithKey:@"length" ascending:[self shortResultsPolicySelected]];
+}
+
+- (BOOL)shortResultsPolicySelected
+{
+    return (self.resultPolicy == kAOFilterResultsLongestFirst) ? NO : YES;
 }
 
 - (NSRange)makeRageWithRange:(NSRange)range

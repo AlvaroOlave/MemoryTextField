@@ -16,6 +16,7 @@
 		38378A541DC668AE00F7FD5D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38378A5B1DC795D100F7FD5D /* AOMemoryTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AOMemoryTextField.h; sourceTree = "<group>"; };
 		38378A5C1DC795D100F7FD5D /* AOMemoryTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AOMemoryTextField.m; sourceTree = "<group>"; };
+		38378A611DCB608700F7FD5D /* Enums.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Enums.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,11 +49,20 @@
 		38378A521DC668AE00F7FD5D /* AOMemoryTextField */ = {
 			isa = PBXGroup;
 			children = (
+				38378A601DCB5FF000F7FD5D /* Enums */,
 				38378A5B1DC795D100F7FD5D /* AOMemoryTextField.h */,
 				38378A5C1DC795D100F7FD5D /* AOMemoryTextField.m */,
 				38378A541DC668AE00F7FD5D /* Info.plist */,
 			);
 			path = AOMemoryTextField;
+			sourceTree = "<group>";
+		};
+		38378A601DCB5FF000F7FD5D /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				38378A611DCB608700F7FD5D /* Enums.h */,
+			);
+			name = Enums;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
