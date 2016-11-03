@@ -95,19 +95,14 @@
         if (self.dataManagerDelegate) {
             [self.dataManagerDelegate saveNewWord:self.text];
         }else{
-            __block bool exist = NO;
-            [self.previousEntries enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                if ([obj isEqualToString:self.text]) {
-                    exist = YES;
-                    *stop = true;
-                }
-            }];
             
-            if (!exist) {
+            NSArray *matchedArray = [self.previousEntries filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF MATCHES[c] %@",self.text]];
+            
+            if (matchedArray.count == 0) {
                 if (self.previousEntries.count > self.capacity) {
                     [self.previousEntries removeObjectAtIndex:0];
                 }
-                [self.previousEntries addObject:self.text];
+                [self.previousEntries addObject:self.text];   
                 [[NSUserDefaults standardUserDefaults] setObject:self.previousEntries forKey:[self getKey]];
             }
         }
