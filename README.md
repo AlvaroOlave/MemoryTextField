@@ -13,14 +13,26 @@ pod 'MemoryTextField', '~> 0.1'
 ## Usage
 
 Just make your UITextField inherit from MemoryTextField and invoke the next methods in the right place:
+```objective-c
+- (void)setNameKey:(NSString *)key; 
+```
+Key used to read from the NSUserDefaults. If you don´t set this key, will be used the default key. TextFields with same key will share the same autocomplete words.
 
-- (void)setNameKey:(NSString *)key; --> key used to read from the NSUserDefaults. If you don´t set this key, will be used the default key. TextFields with same key will share the same autocomplete words.
+```objective-c
+- (void)saveNewEntry;
+```
 
-- (void)saveNewEntry; --> Invoke this method when you want to save the current word. (e.g. In -(BOOL)textFieldShouldReturn:(UITextField*)textField method.)
+Invoke this method when you want to save the current word. (e.g. In -(BOOL)textFieldShouldReturn:(UITextField*)textField method.)
 
-- (BOOL)shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string; --> In textField´s delegate, implement 
+```objective-c
+- (BOOL)shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string; 
+```
+
+In your textField´s delegate, implement 
+
+```objective-c
         - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
-    
+```
     and return the result of invoke this MemoryTextField method. 
 
 
